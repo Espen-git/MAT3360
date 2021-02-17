@@ -1,0 +1,202 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\begin{document}
+\title{MAT3360 Oblig 1}
+\author{Espen Lønes}
+\date{\today}
+\maketitle
+\ \\
+Question 1)\\
+a)\\
+\ \\
+Prove that
+$\int_0^1 u(x)^2 dx \leq \frac{1}{2} \int_0^1 u'(x)^2 dx$\\
+Where $u \in C_0^2((0,1))$ and $x \in (0,1)$. We start with.
+$$
+u(x) = \int_0^x u'(y) dy 
+$$
+And use the Cauchy-Schwarts inequality.
+$$
+|u(x)| = |\int_0^x u'(y) dy| \leq (\int_0^x 1^2 dy)^{\frac{1}{2}}(\int_0^x u'(y)^2 dy)^{\frac{1}{2}}
+$$
+Square on both sides
+$$
+u(x)^2 \leq x(\int_0^x u'(y)^2 dy)
+$$
+Integrate from 0 to 1.
+$$
+\int_0^1 u(x)^2 dx \leq \int_0^1 \int_0^x xu'(y)^2 dy\ dx
+$$
+Change integration order.
+$$
+\int_0^1 \int_y^1 xu'(y)^2 dx\ dy
+=
+\int_0^1 \frac{1}{2} u'(y)^2 - \frac{1}{2} y^2 u'(y)^2\ dy
+$$ 
+$
+- \frac{1}{2} y^2 u'(y)^2 \leq 0 
+$
+\\
+Therefore. 
+$$
+\int_0^1 \frac{1}{2} u'(y)^2 - \frac{1}{2} y^2 u'(y)^2\ dy
+\leq
+\int_0^1 \frac{1}{2} u'(y)^2
+$$
+and
+$$
+\int_0^1 u(x)^2 dx \leq \frac{1}{2} \int_0^1 u'(x)^2 dx
+$$
+\newpage
+\ \\
+b)\\
+Prove
+$$
+h\sum_{j=1}^n v_j^2 \leq \frac{1}{2} h \sum_{j=1}^{n+1} (D_-^h v_j)^2
+$$
+Where $v \in D_{0,h}$. We start with.
+$$
+v_j = h\sum_{k=1}^j (D_-^h v_k)
+$$
+We then use the Cauchy-Schwarts inequality.
+$$
+|h\sum_{k=1}^j (D_-^h v_k)| \leq (h\sum_{k=1}^j 1^2)^{\frac{1}{2}}(h \sum_{k=1}^j (D_-^h v_k)^2)^{\frac{1}{2}}
+$$
+Square on both sides.
+$$
+v_j^2 \leq (h\sum_{k=1}^j 1^2)(h \sum_{k=1}^j (D_-^h v_k)^2)
+=
+(hj)(h \sum_{k=1}^j (D_-^h v_k)^2)
+$$
+Then sum from $j=1$ to $j=n$ and multiply by h on both sides.
+$$
+h\sum_{j=1}^n v_j^2 \leq h^3 \sum_{j=1}^n \sum_{k=1}^j j(D_-^h v_k)^2
+$$
+Change summation order.
+$$
+h\sum_{j=1}^n v_j^2 \leq h^3 \sum_{k=1}^{n+1} \sum_{j=k}^n j(D_-^h v_k)^2
+$$
+$$
+\sum_{j=k}^{n+1} j \leq \sum_{j=1}^n j = \frac{n(n+1)}{2}
+$$
+Inserting this gives us.
+$$
+h\sum_{j=1}^n v_j^2 \leq h^3 \sum_{k=1}^{n+1} \frac{n(n+1)}{2} (D_-^h v_k)^2
+$$
+Then using the fact that $h=\frac{1}{(n+1)}$
+$$
+h\sum_{j=1}^n v_j^2 \leq h \frac{1}{(n+1)^2} \frac{n(n+1)}{2} \sum_{k=1}^{n+1} (D_-^h v_k)^2
+=
+\frac{1}{2} h \frac{n}{(n+1)} \sum_{k=1}^n (D_-^h v_k)^2
+$$
+\newpage
+\ \\
+$$
+lim_{n \to \infty} \frac{n}{(n+1)} = 1
+$$ 
+So
+$$
+\frac{n}{(n+1)} \leq 1
+$$
+Giving us.
+$$
+\frac{1}{2} h \frac{n}{(n+1)} \sum_{k=1}^{n+1} (D_-^h v_k)^2 
+\leq
+\frac{1}{2} h  \sum_{k=1}^{n+1} (D_-^h v_k)^2 
+=
+\frac{1}{2} h  \sum_{j=1}^{n+1} (D_-^h v_j)^2 
+$$
+Giving
+$$
+h\sum_{j=1}^n v_j^2 \leq \frac{1}{2} h \sum_{j=1}^{n+1} (D_-^h v_j)^2
+$$
+\ \\
+\ \\
+Question 2)\\
+\ \\
+We have $-u''(x) + u(x) = f(x)$ \ \ \ \ (1) \\
+$u \in C_0^2((0,1))$ and $x \in (0,1)$ and f is given.
+\ \\
+A solution $u$ is on the form.
+$$
+u(x) = u_h(x) + u_p(x) 
+$$
+Where $u_h(x)$ is the solution to the corresponding homogeneous equation:
+$-u''(x) + u(x) = 0$\\
+And $u_p(x)$ is a particular solution.\\
+We can find the form of $u_h(x)$ by observing that
+$$
+u'(x) - u''(x) = 0 \iff u''(x) = u'(x) \iff u¨'(x) = C_1 e^x 
+$$
+Giving us.
+$$
+u_h(x) = C_1e^x + C_2
+$$
+Since we are given $f(x)=1$, $u_p(x)$ might be on the form $u_p(x) = Ax$.\\
+Giving $u_p'(x) = A$ and $u_p''(x) = 0$. We must then find $A$ s.t.
+$$
+u'(x) - u''(x) = 1
+$$
+$$
+A - 0 = 1 \iff A=1
+$$
+We then have.
+$$
+u(x) = C_1e^x + C_2 + x 
+$$
+Inserting for $u(0)= 0$ and $u(1)=0$
+$$
+u(0) = C_1 + C_2 = 0 \iff C_2 = -C_1
+$$
+$$
+u(1) = C_1e - C_1 = -1 \iff C_1 = \frac{1}{e-1} \iff C_2 = -\frac{1}{e-1}
+$$
+Inserting $C_1$ and $C_2$ gives.
+$$
+u(x) = \frac{1}{1-e}e^x - \frac{1}{1-e} + x 
+=
+\frac{e^x - 1}{1 - e} + x
+$$
+\ \\
+\ \\
+Question 3)\\
+a)\\
+\ \\
+Show that if $u$ solves (1) then
+$$
+\int_0^1 u'(x)^2 dx = \int_0^1 f(x)u(x) dx
+$$
+we start with (1) and multiply by $u$ then integrate from 0 to 1. which gives.
+$$
+\int_0^1 u(x)u'(x) - u(x)u''(x) dx = \int_0^1 f(x)u(x) dx
+$$
+Left side:
+$$
+\int_0^1 u(x)u'(x) - u(x)u''(x) dx
+=
+\int_0^1 u(x)u'(x) dx - \int_0^1 u(x)u''(x) dx
+$$
+$$
+=
+\int_0^1 u(x)u'(x) dx - \left[ u(x)u'(x)|_0^1 - \int_0^1 u'(x)u'(x) dx \right]
+$$
+$$
+=
+\int_0^1 u(x)u'(x) dx + \int_0^1 u'(x)^2 dx 
+$$
+We now look at
+$$
+I = \int_0^1 u(x)u'(x) dx = u(x)u(x)|_0^1 - \int u'(x)u(x) dx = - \int u'(x)u(x) dx = -I
+$$
+$I = -I \iff I = 0$
+So we have
+$$
+\int_0^1 u'(x)^2 dx = \int_0^1 f(x)u(x) dx
+$$
+\newpage
+\ \\
+b)\\
+\ \\
+
+\end{document}
