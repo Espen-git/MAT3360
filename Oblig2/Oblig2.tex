@@ -1,0 +1,447 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\begin{document}
+\title{MAT3360 Oblig 2}
+\author{Espen Lønes}
+\date{\today}
+\maketitle
+\ \\
+Question 1)\\
+a)\\
+\ \\
+We have $u_k(x,t) = T_k(t)X_k(x)$, with the ansatz $X_k(x) = e^{ik\pi x}$\\
+By doing separation of variables we get, $\frac{T'}{T} = \frac{X'''}{X} = -\lambda$.\\
+Giving us the two equations.
+$$
+-X''' = \lambda X
+$$
+$$
+T' = -\lambda T
+$$
+The first gives us:
+$$
+-(ik\pi)^3 e^{ik\pi x} = \lambda e^{ik\pi x}
+\iff
+\lambda_k = i(k\pi)^3
+$$
+Further the second equation has the solution:
+$$
+T_k(t) = e^{-\\lambda_k t} = e^{-i(k\pi)^3t}
+$$
+We then get:
+$$
+u_k(x,t) = e^{-i(k\pi)^3t} * e^{ik\pi x}
+$$
+Using $e^{i\alpha} = cos(\alpha) + isin(\alpha)$, gives:
+$$
+u_k = [cos(k^3\pi^3t) - i sin(k^3\pi^3t)] * [cos(k\pi x) + i sin(k\pi x)]
+$$
+$$
+=
+cos(k^3\pi^3t) cos(k\pi x) + sin(k^3\pi^3t) sin(k\pi x)
++ i[cos(k^3\pi^3t)sin(k\pi x) - sin(k^3\pi^3t)cos(k\pi x)]
+$$
+Gives the family of real solutions:
+$$
+u_k(x,t) = cos(k^3\pi^3t) cos(k\pi x) + sin(k^3\pi^3t) sin(k\pi x)
+$$
+\newpage
+\ \\
+b)\\
+\ \\
+We can form new solutions by taking linear combinations of solutions.
+$$
+u(x,t) = \sum_{k=1}^N c_k u_k(x,t)
+$$
+First we have $f(x) = cos(\pi x)$. Using the initial condition $u(x,0) = f(x)$. We get:
+$$
+u(x,0) = \sum_{k=1}^N c_k u_k(x,0)
+= \sum_{k=1}^N c_k cos(k\pi x)
+= f(x) = cos(\pi x)
+$$
+Which is solved by having $c_1 = 1$ and all other $c_k = 0$. Giving:
+$$
+u(x,t) = \sum_{k=1}^N c_k u_k(x,t) = u_1 = cos(\pi^3t) cos(\pi x) + sin(\pi^3t) sin(\pi x)
+$$
+Could not find solution for $f(x) = sign(x)$\\
+\ \\
+Did not do c)\\
+\newpage
+\ \\
+Question 2)\\
+a)\\
+\ \\
+$$
+<u, D_-v>_{\Delta x}
+=
+\Delta x \sum_{j=0}^n u_j D_-v_j
+=
+\Delta x \sum_{j=0}^n u_j \frac{v_j - v_{j-1}}{\Delta x}
+=
+\sum_{j=0}^n u_j (v_j - v_{j-1})
+$$
+$$
+=
+\sum_{j=0}^n u_j\ v_j - \sum_{j=0}^n u_j\ v_{j-1}
+=
+\sum_{j=0}^n u_j\ v_j - [ \frac{1}{2}u_0v_{-1} + \sum_{j=1}^n u_j\ v_{j-1} + \frac{1}{2}u_{n+1}v_{n}]
+$$
+We have $u_0 = u_{n+1}$ and $v_{-1} = v_{n}$.
+$$
+=
+\sum_{j=0}^n u_j\ v_j - [\sum_{j=1}^n u_j\ v_{j-1} + u_{n+1}v_{n}]
+=
+\sum_{j=0}^n u_j\ v_j - \sum_{j=1}^{n+1} u_j\ v_{j-1}
+$$
+Showing that $\sum_{j=0}^n u_j\ v_{j-1} = \sum_{j=1}^{n+1} u_j\ v_{j-1}$ Which further shows:
+$$\sum_{j=0}^n u_j\ v_{j-1} = \sum_{j=0}^{n} u_{j+1}\ v_{j}$$
+Now continuing the calculation we have:
+$$
+<u, D_-v>_{\Delta x}
+=
+\sum_{j=0}^n u_j\ v_j - \sum_{j=0}^{n} u_{j+1}\ v_{j}
+=
+\sum_{j=0}^n u_j\ v_j - u_{j+1}\ v_{j}
+=
+\sum_{j=0}^n (u_j - u_{j+1}) v_j
+$$
+$$
+=
+-\Delta x \sum_{j=0}^n \frac{(u_{j+1} - u_j)}{\Delta x} v_j
+=
+-<D_+u,v>_{\Delta x}
+$$
+\newpage
+\ \\
+b)\\
+\ \\
+$$
+D_+ v_j - D_- v_j
+=
+\frac{v_{j+1} - v_j}{\Delta x} - \frac{v_j - v_{j-1}}{\Delta x}
+=
+D_+ v_j - D_+ v_{j-1}
+$$
+$$
+=
+\Delta x D_+ (\frac{v_j - v_{j-1}}{\Delta x})
+=
+\Delta x D_+ D_- v_j
+$$
+c)\\
+Start with the RHS of the equation:
+$$
+-\frac{\Delta x}{2} ||D_+ D_- v||_{\Delta x}^2
+=
+-\frac{\Delta x^2}{2} \sum_{j=0}^n (D_+ D_- v_j)^2
+=
+-\frac{\Delta x^2}{2} \sum_{j=0}^n (v_{j+1} -2v_j + v_{j-1})^2
+$$
+$$
+=
+-\frac{1}{2\Delta x^2} \sum_{j=0}^n v_{j+1}v_{j+1} - 2v_{j}v_{j+1} + v_{j+1}v_{j-1} - 2v_{j+1}v_{j} +4v_{j}v_{j} - 2v_{j+1}v_{j-1} - 2v_{j}v_{j-1} + v_{j-1}v_{j-1}
+$$
+$$
+=
+-\frac{1}{2\Delta x^2} \sum_{j=0}^n v_{j}v_{j} -2v_{j}v_{j+1} + v_{j+2}v_{j} -2v_{j+1}v_{j} +4v_{j}v_{j} -2v_{j+1}v_{j} + v_{j+2}v_{j} - 2v_{j}v_{j-1} + v_{j}v_{j} 
+$$
+$$
+=
+-\frac{1}{2\Delta x^2} \sum_{j=0}^n v_j\ (2v_{j+2} - 6v_{j+1} + 6v_{j} - 2v_{j-1})
+$$
+$$
+=
+-\frac{1}{\Delta x^2} \sum_{j=0}^n v_j\ (v_{j+2} - 3v_{j+1} + 3v_{j} - v_{j-1})
+$$
+Then starting from the LHS:
+$$
+-<v,D_+D_-D_+v>_{\Delta x}
+=
+-\Delta x \sum_{j=0}^n v_j * D_+D_-D_+v_j
+$$
+$$
+=
+-\sum_{j=0}^n v_j * D_+D_-(v_{j+1} - v_j)
+=
+-\frac{1}{\Delta x} \sum_{j=0}^n v_j * D_+(v_{j+1} - 2v_j + v_{j-1})
+$$
+$$
+=
+-\frac{1}{\Delta x^2} \sum_{j=0}^n v_j\ (v_{j+2} - 2v_{j+1} + v_{j} - (v_{j+1} - 2v_j + v_{j-1}))
+$$
+$$
+=
+-\frac{1}{\Delta x^2} \sum_{j=0}^n v_j\ (v_{j+2} -3v_{j+1} + 3v_{j} - v_{j-1})
+$$
+We see that RHS$=$LHS.
+\newpage
+\ \\
+d)\\
+\ \\
+We need to find $D_p$(for $D_+$) and $D_m$(for $D_-$) to satisfy $D_p\ v = b_p$ and $D_m\ v = b_m$.\\
+Where $v = (v_0, ..., v_n)^T$.\\
+\ \\
+$b_p = (\frac{v_1 - v_0}{\Delta x}, ..., \frac{v_{n+1} - v_n}{\Delta x} = \frac{v_0 - v_n}{\Delta x})^T$\\
+We then get:
+$$
+D_p =
+\frac{1}{\Delta x}
+\begin{bmatrix}
+-1 & 1 & 0 & ... &&&&\\
+0  & -1& 1 & 0   &...&&&\\
+0  & 0 & -1& 1   & 0 &&&\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&& -1 & 1\\
+1 & 0 && ... && 0 & -1 
+\end{bmatrix}
+$$
+Using similar logic we get:
+$$
+D_m =
+\frac{1}{\Delta x}
+\begin{bmatrix}
+1 & 0 &...&&& 0 & -1\\
+-1 & 1 & 0 & ... &&&&\\
+0  & -1& 1 & 0   &...&&&\\
+0  & 0 & -1& 1   & 0 &...&&\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&& -1 & 1
+\end{bmatrix}
+$$
+\newpage
+\ \\
+e)\\
+\ \\
+We have $D_-D_+D_-u_j = \frac{-u_{j-2} + 3u_{j-1} - 3u_j + u_{j+1}}{\Delta x^3}$\\
+And using the Fourier series:\\
+$$
+u(x_{j+1}) = u(x_j + \Delta x)
+=
+u(x_j) + \Delta x u'(x_j) + \frac{\Delta x^2}{2}u''(x_j) + \frac{\Delta x^3}{6}u'''(x_j) + c_1\Delta x^4
+$$
+$$
+u(x_{j-1}) = u(x_j - \Delta x)
+=
+u(x_j) - \Delta x u'(x_j) + \frac{\Delta x^2}{2}u''(x_j) - \frac{\Delta x^3}{6}u'''(x_j) + c_2\Delta x^4
+$$ 
+$$
+u(x_{j-2}) = u(x_{j-1} - \Delta x)
+=
+u(x_{j-1}) - \Delta x u'(x_{j-1}) + \frac{\Delta x^2}{2}u''(x_{j-1}) - \frac{\Delta x^3}{6}u'''(x_{j-1}) + c_3\Delta x^4
+$$
+Using this we get:
+$$
+D_-D_+D_-u(x_j) - u'''(x_j)
+=
+\frac{-u_{j-2} + 3u_{j-1} - 3u_j + u_{j+1}}{\Delta x^3} - u'''(x_j)
+$$
+\ \\
+$$
+=
+\frac{1}{\Delta x^3}\ [\ 
+- u(x_{j-1}) + \Delta x u'(x_{j-1}) - \frac{\Delta x^2}{2}u''(x_{j-1}) + \frac{\Delta x^3}{6}u'''(x_{j-1}) - c_3\Delta x^4
+$$
+$$
++ 3u(x_j) - 3\Delta x u'(x_j) + \frac{3\Delta x^2}{2}u''(x_j) - \frac{3\Delta x^3}{6}u'''(x_j) + 3c_2\Delta x^4
+$$
+$$
+-3u(x_j)
+$$
+$$
++ u(x_j) + \Delta x u'(x_j) + \frac{\Delta x^2}{2}u''(x_j) + \frac{\Delta x^3}{6}u'''(x_j) + c_1\Delta x^4\ ]
+- u'''(x_j)
+$$
+\ \\
+$$
+=
+\frac{1}{\Delta x^3}\ [\ 
+- u(x_{j-1}) + \Delta x u'(x_{j-1}) - \frac{\Delta x^2}{2}u''(x_{j-1}) + \frac{\Delta x^3}{6}u'''(x_{j-1}) - c_3\Delta x^4	
+$$
+$$
+- 2\Delta x u'(x_j) + 2\Delta x^2 u''(x_j) - \frac{1}{3}\Delta x^3 u'''(x_j) + 3c_2\Delta x^4 
+$$
+$$
++ u(x_j) + c_1\Delta x^4\ ]\ -u'''(x_j)
+$$
+\newpage
+\ \\
+$$
+=
+\frac{1}{\Delta x^3}\ [\ 
+- u(x_j) + \Delta x u'(x_j) - \frac{\Delta x^2}{2}u''(x_j) + \frac{\Delta x^3}{6}u'''(x_j) - c_2\Delta x^4
+$$
+$$
++ \Delta x u'(x_{j-1}) - \frac{\Delta x^2}{2}u''(x_{j-1}) + \frac{\Delta x^3}{6}u'''(x_{j-1}) - c_3\Delta x^4
+$$
+$$
+- 2\Delta x u'(x_j) + 2\Delta x^2 u''(x_j) - \frac{1}{3}\Delta x^3 u'''(x_j) + 3c_2\Delta x^4 
+$$
+$$
++ u(x_j) + c_1\Delta x^4\ ]\ -u'''(x_j)
+$$
+\ \\
+$$
+= \frac{1}{\Delta x^3}\ [\ 
+\Delta x u'(x_{j-1}) - \frac{\Delta x^2}{2}u''(x_{j-1}) + \frac{\Delta x^3}{6}u'''(x_{j-1}) - c_3\Delta x^4
+$$
+$$
+-\Delta x u'(x_j) + \frac{3}{2}\Delta x^2 u''(x_j) - \frac{1}{6}\Delta x^3 u'''(x_j) + 2c_2\Delta x^4 
+$$
+$$
++ c_1\Delta x^4\ ]\ -u'''(x_j)
+$$
+Which gives:
+$$
+u'''(x_j) = D_-D_+D_-u_j + \Delta x\ (u'(x_{j-1}) - u'(x_j)) + O(\Delta x^2)
+$$
+$$
+\Rightarrow
+$$
+$$
+D_-D_+D_-u_j - u'''(x_j) = O(\Delta x)
+$$
+\newpage
+\ \\
+Question 3)\\
+a)\\
+\ \\
+$$
+u_t = u_{xxx} \Rightarrow 0 = u_{xxx}(x,t) - u_t(x,t) 
+$$
+$$
+= \frac{1}{2} D_-D_+D_-\ (u(x,t) - u(x,t+\Delta t)) + O(\Delta x) - \frac{u(x,t+\Delta t) - u(x,t)}{\Delta t} + O(\Delta t)
+$$
+Evaluation at $x_j^m$ (where $u(x_j, t_m) = u(x_j^m)$) gives:
+$$
+\frac{1}{2} D_-D_+D_-\ (u(x_j^m) - v_j^m  - (u(x_j^{m+1}) - v_j^{m+1})) - \frac{u(x_j^{m+1} - v_j^{m+1}) - (u(x_j^m) - v_j^m)}{\Delta t} = O(\Delta x + \Delta t)
+$$
+So it is reasonable to say that $v_j^m \approx u(x_j^m)$ for small $\Delta x$ and small $\Delta t$. (Making (2) a reasonable scheme for (1)).\\
+\ \\
+b)\\
+\ \\
+Start with:
+$$
+<\frac{v^{m+1} - v^m}{t}, v^{m+1} + v^m>_{\Delta x}
+=
+<\frac{1}{2} D_-D_+D_-\ (v^{m+1} - v^m), v^{m+1} + v^m>_{\Delta x}
+$$
+$$
+\iff
+$$
+$$
+\Delta x \sum_{j=0}^n (\frac{v^{m+1} - v^m}{t}) (v^{m+1} + v^m)
+=
+\Delta x \sum_{j=0}^n (\frac{1}{2} D_-D_+D_-\ (v^{m+1} - v^m)) (v^{m+1} + v^m)
+$$
+$$
+\iff
+$$
+$$
+\frac{\Delta x}{\Delta t} \sum_{j=0}^n (v_j^{m+1})^2 - (v_j^m)^2
+$$
+$$
+=
+\frac{\Delta x}{2\Delta x^3} \sum_{j=0}^n [v_{j+1}^{m+1} - 3v_{j}^{m+1} + 3v_{j-1}^{m+1} - v_{j-2}^{m+1} + v_{j+1}^{m} - 3v_{j}^{m} + 3v_{j-1}^{m} - v_{j-2}^{m}] (v_j^{m+1} + v_j^m)
+$$
+$$
+\iff
+$$
+$$
+E^{m+1} - E^m = \frac{\Delta t}{2\Delta x^2} \sum_{j=0}^n [v_{j+1}^{m+1} - 3v_{j}^{m+1} + 3v_{j-1}^{m+1} - v_{j-2}^{m+1} + v_{j+1}^{m} - 3v_{j}^{m} + 3v_{j-1}^{m} - v_{j-2}^{m}] (v_j^{m+1} + v_j^m)
+$$
+\newpage
+\ \\
+Have to show:
+$$
+\frac{\Delta t}{2\Delta x^2} \sum_{j=0}^n [v_{j+1}^{m+1} - 3v_{j}^{m+1} + 3v_{j-1}^{m+1} - v_{j-2}^{m+1} + v_{j+1}^{m} - 3v_{j}^{m} + 3v_{j-1}^{m} - v_{j-2}^{m}] (v_j^{m+1} + v_j^m)
+\leq 0
+$$
+I did not get any further.\\
+\ \\
+c)\\
+\ \\
+The matrix form of $D_-D_+D_-$ is:
+$$
+\frac{1}{\Delta x^3}
+\begin{bmatrix}
+-3 & 1 & 0 & ... &&&0& -1&3\\
+3  & -3& 1 & 0   &...&&&0&-1\\
+-1  & 3 & -3& 1 &0& ... &&&0\\
+0  & -1 & 3& -3 &1&0&...&&0\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&&-1&3& -3 & 1\\
+1 & 0 &...&&& 0&-1& 3 & -3 
+\end{bmatrix}
+$$
+We then get:
+$$
+A = I - \frac{\Delta t}{2\Delta x^3}
+\begin{bmatrix}
+-3 & 1 & 0 & ... &&&0& -1&3\\
+3  & -3& 1 & 0   &...&&&0&-1\\
+-1  & 3 & -3& 1 &0& ... &&&0\\
+0  & -1 & 3& -3 &1&0&...&&0\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&&-1&3& -3 & 1\\
+1 & 0 &...&&& 0&-1& 3 & -3 
+\end{bmatrix}
+$$
+$$
+=
+\frac{\Delta t}{2\Delta x^3}
+\begin{bmatrix}
+4 & -1 & 0 & ... &&&0& 1&-3\\
+-3  & 4& -1 & 0   &...&&&0&1\\
+1  & -3 & 4& -1 &0& ... &&&0\\
+0  & 1 & -3& 4 &-1&0&...&&0\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&&1&-3& 4 & -1\\
+-1 & 0 &...&&& 0&1& -3 & 4 
+\end{bmatrix}
+$$
+\newpage
+\ \\
+We can call this $\frac{\Delta t}{2\Delta x^3} B$, where if B is invertible then so is A.\\
+We see that we can do Gaussian elimination on B:
+$$
+B \sim
+\begin{bmatrix}
+4 & -1 & 0 & ... &&&0& 1&-3\\
+-3  & 4& -1 & 0   &...&&&0&1\\
+1  & -3 & 4& -1 &0& ... &&&0\\
+0  & 1 & -3& 4 &-1&0&...&&0\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&&1&-3& 4 & -1\\
+-1 & 0 &...&&& 0&1& -3 & 4\\
+4 & -1 & 0 & ... &&&0& 1&-3\\
+-3  & 4& -1 & 0   &...&&&0&1
+\end{bmatrix}
+$$
+$$
+\sim
+\begin{bmatrix}
+1  & -3 & 4& -1 &0& ... &&&0\\
+0  & 1 & -3& 4 &-1&0&...&&0\\
+\vdots &&& \ddots\\
+\\
+0 & ... &&&0& 1&-3& 4 & -1\\
+0 & ... &&&& 0&1& c_1 & c_2\\
+0 & ... &&&&&0& 1& c_3\\
+0 & ... &&&&&&0&1
+\end{bmatrix}
+$$
+We now see that B has full rank meaning it is invertible $\iff$ A is invertible.\\
+\ \\
+d)\\
+\ \\
+Could not get it to work. 
+\end{document}
